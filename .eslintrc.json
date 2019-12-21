@@ -25,6 +25,7 @@
     ],
     "import/prefer-default-export": "off",
     "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "react/no-this-in-sfc": "off",
     "react/jsx-one-expression-per-line": "off",
     "react/react-in-jsx-scope": "off",
     "react-native/no-color-literals": "off",
