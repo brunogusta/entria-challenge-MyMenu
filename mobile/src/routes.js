@@ -5,7 +5,6 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Login from '~/pages/Login';
 import Register from '~/pages/Register';
 import Menu from '~/pages/Menu';
-import AddItem from '~/pages/AddItem';
 
 
 const AuthStack = createStackNavigator(
@@ -22,7 +21,6 @@ const AuthStack = createStackNavigator(
 const AppStack = createStackNavigator(
   {
     Menu,
-    AddItem,
   },
   {
     headerMode: 'none',
