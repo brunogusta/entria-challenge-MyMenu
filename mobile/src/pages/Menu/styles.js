@@ -53,10 +53,9 @@ export const ItemBox = styled.View.attrs({
 
   elevation: 15,
 })`
-  flex-direction: row;
-  height: ${hp('30%')};
+  height: ${hp('33%')};
   width: ${wp('43%')};
-  margin: 10px ${`${wp('4.5%')}px`};
+  margin: 10px ${`${wp('4%')}px`};
   border-radius: 10px;
   background-color: #fff;
 `;
@@ -66,7 +65,7 @@ export const HeaderWrapper = styled.View`
 `;
 
 export const ImageWrapper = styled.View`
-  flex: 2;
+  flex: 1;
   justify-content: center;
   align-items: center;
 `;

@@ -21,7 +21,6 @@ import {
   TextError,
   InputScroll,
   styles,
-  Header,
 } from './styles';
 
 import background from '~/assets/images/background.png';
@@ -109,7 +108,6 @@ const Login = ({ navigation }) => {
         <FooterWrapper>
           <FooterText>Do you not a member?</FooterText>
           <RegisterBtn onPress={() => navigation.navigate('Register')}>
-
             <RegisterText>Register.</RegisterText>
           </RegisterBtn>
         </FooterWrapper>

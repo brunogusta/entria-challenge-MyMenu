@@ -34,7 +34,6 @@ import {
   SendBtn,
   TextBtn,
   ScrollView,
-  ObsText,
 } from './styles';
 
 import catImage from '~/assets/images/catImage.png';
@@ -123,7 +122,7 @@ const AnimatedModal = () => {
         <KeyboardAvoidingView
           style={styles.keyboard}
           behavior="padding"
-          keyboardVerticalOffset={showImage ? 90 : null}
+          keyboardVerticalOffset={showImage ? 100 : null}
         >
           <ExitBtn onPress={() => closeModal()}>
             <Icon name="remove" type="font-awesome" color="#fff" size={hp('4%')} />
@@ -188,7 +187,7 @@ const AnimatedModal = () => {
                             <RemovePothoBtn onPress={() => removeImage()}>
                               <Icon name="remove" type="font-awesome" color="#fff" size={hp('3%')} />
                             </RemovePothoBtn>
-                            <PreviewImage source={{ uri: photo.uri }} />
+                            <PreviewImage source={{ uri: photo.uri }} resizeMode="contain" />
                           </PreviewImageWrapper>
                         )}
                     </SelectImageWrapper>
@@ -201,9 +200,6 @@ const AnimatedModal = () => {
                         onChangeText={handleChange('details')}
                       />
                     </DetailsBox>
-                    <ObsText>
-                      Use (,) to separate the details. Maximum (4).
-                    </ObsText>
                     <SendBtn onPress={handleSubmit}>
                       <LinearGradient
                         locations={[0.0, 1.0]}

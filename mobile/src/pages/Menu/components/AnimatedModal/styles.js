@@ -84,10 +84,14 @@ export const Input = styled.TextInput`
 
 export const SelectImageButton = styled.TouchableOpacity`
   flex: 1;
+  justify-content: center;
+  margin-top: 20px;
+  margin-right: 10px;
 `;
 
 export const IconWrapper = styled.View`
-  flex: 1;
+  height: 90%;
+  width: 100%;
   border: dashed 2px  #E20048;
   border-radius: 5px;
   align-items: center;
@@ -149,14 +153,6 @@ export const SendBtn = styled.TouchableOpacity`
   margin: 10px 0px;
   border-radius: ${wp('10%')};
 `;
-
-export const ObsText = styled.Text`
-  font-size: ${hp('2%')};
-  color: #ccc;
-  font-weight: bold;
-  align-self: center;
-`;
-
 
 export const styles = StyleSheet.create({
   box: {

@@ -4,7 +4,9 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 
 
 export const Container = styled.View`
-  justify-content: center;
+  align-items: flex-end;
+  margin-top: 3%;
+  padding: 0px 3%;
 `;
 
 
@@ -29,25 +31,44 @@ export const CloseDetailsBtn = styled.TouchableOpacity.attrs({
 `;
 
 export const DetailText = styled.Text`
+  padding: 10px;
+  text-align: justify;
 `;
 
 export const DetailsWrapper = styled.View`
   flex: 1;
   justify-content: space-between;
-  padding: 10px;
 `;
 
+export const Header = styled.View`
+  flex: 1;
+  padding: 2px;
+  background-color: #E20048;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+`;
+
+export const ImageHeader = styled.ImageBackground`
+  height: 100%;
+`;
+
+
+export const ContentWrapper = styled.View`
+  flex: 4;
+  background-color: #fff;
+  border-radius: 10px;
+`;
 
 export const styles = StyleSheet.create({
   box: {
     position: 'absolute',
-    left: wp('45%'),
+    left: wp('100%'),
     top: 0,
     bottom: 0,
-    height: hp('30%'),
-    width: 0,
+    height: hp('33%'),
+    width: wp('43%'),
     borderRadius: 10,
-    backgroundColor: '#fff',
+    backgroundColor: '#E20048',
 
     shadowColor: '#000',
     shadowOffset: {

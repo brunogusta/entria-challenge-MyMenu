@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { StatusBar, FlatList } from 'react-native';
 
-import { Icon } from 'react-native-elements';
-
 import {
   Container,
   LogoImage,
@@ -21,31 +19,35 @@ import {
 import logo from '~/assets/images/logo.png';
 
 import pizza from '~/assets/images/1.png';
-import coca from '~/assets/images/coca.png';
+// import coca from '~/assets/images/coca.png';
 
 import AnimatedModal from './components/AnimatedModal';
 import AnimatedDetails from './components/AnimatedDetails';
 
 
-const Menu = ({ navigation }) => {
+const Menu = () => {
   const [items] = useState({
     data: [
       {
+        id: '1',
         title: 'Calabresa',
         cost: '23,00',
-        details: 'Qualquer coisa 33',
+        details: 'Qualquer coisa 33, lorem ipsum testando, 123, 123, 123 osahdoahdoiashdosahd',
       },
       {
+        id: '2',
         title: 'Frango',
         cost: '23,00',
         details: 'Qualquer coisa 33',
       },
       {
+        id: '3',
         title: 'Brócolis',
         cost: '23,00',
         details: 'Qualquer coisa 2123',
       },
       {
+        id: '4',
         title: '4 Queijos',
         cost: '23,00',
         details: 'Qualquer coisa 12 ',
@@ -66,20 +68,18 @@ const Menu = ({ navigation }) => {
           <FlatList
             data={items.data}
             renderItem={({ item }) => (
-              <>
-                <ItemBox key={item.title}>
-                  <HeaderWrapper>
-                    <ImageWrapper>
-                      <ItemImage source={pizza} resizeMode="contain" />
-                    </ImageWrapper>
-                    <InfoWrapper>
-                      <ItemText>{item.title}</ItemText>
-                      <ItemText>{`R$ ${item.cost}`}</ItemText>
-                    </InfoWrapper>
-                  </HeaderWrapper>
-                  <AnimatedDetails details={item.details} />
-                </ItemBox>
-              </>
+              <ItemBox key={item.id}>
+                <AnimatedDetails details={item.details} />
+                <HeaderWrapper>
+                  <ImageWrapper>
+                    <ItemImage source={pizza} resizeMode="contain" />
+                  </ImageWrapper>
+                  <InfoWrapper>
+                    <ItemText>{item.title}</ItemText>
+                    <ItemText>{`R$ ${item.cost}`}</ItemText>
+                  </InfoWrapper>
+                </HeaderWrapper>
+              </ItemBox>
             )}
             showsVerticalScrollIndicator={false}
           />
