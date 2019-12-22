@@ -101,5 +101,5 @@ const AnimatedDetails = ({ details }) => {
 export default AnimatedDetails;
 
 AnimatedDetails.propTypes = {
-  details: PropTypes.string().isRequired,
+  details: PropTypes.string.isRequired,
 };

@@ -19,7 +19,6 @@ import {
 import logo from '~/assets/images/logo.png';
 
 import pizza from '~/assets/images/1.png';
-// import coca from '~/assets/images/coca.png';
 
 import AnimatedModal from './components/AnimatedModal';
 import AnimatedDetails from './components/AnimatedDetails';
