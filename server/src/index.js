@@ -42,8 +42,7 @@ const contextSettings = async ({ request, connection }) => {
 const server = new GraphQLServer(
   {
     schema,
-    context: contextSettings,
-    middlewares
+    context: contextSettings
   }
 );
 

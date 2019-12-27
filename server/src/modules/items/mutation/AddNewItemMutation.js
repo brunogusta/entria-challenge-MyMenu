@@ -6,20 +6,31 @@ import path from 'path';
 import sharp from 'sharp';
 
 import ItemType from '../ItemType';
+import ItemModel from '../ItemModel';
 
 
 export default mutationWithClientMutationId({
   name: 'AddNewItemMutation',
   inputFields: {
+    title: {
+      type: new GraphQLNonNull(GraphQLString)
+    },
+    cost: {
+      type: new GraphQLNonNull(GraphQLString)
+    },
+    details: {
+      type: new GraphQLNonNull(GraphQLString)
+    },
     file: {
       type: new GraphQLNonNull(GraphQLUpload)
     }
   },
   mutateAndGetPayload: async ({
-    file
+    title, cost, details, file
   }) => {
     const { createReadStream, filename } = await file;
 
+    console.log('chamou');
     const [name] = filename.split('.');
     const fileName = `${name}_${(Math.random() * 100).toFixed(2)}.png`;
 
@@ -40,13 +51,19 @@ export default mutationWithClientMutationId({
     fs.unlinkSync(path.resolve(__dirname, '../../../uploads', fileName));
 
 
-    return {
-      log: 'enviado'
-    };
+    const item = await ItemModel.create({
+      title,
+      cost,
+      details,
+      file: fileName
+    });
+
+
+    return item;
   },
   outputFields: {
-    data: {
-      type: GraphQLString,
+    item: {
+      type: ItemType,
       resolve: (item) => item
     },
     error: {
