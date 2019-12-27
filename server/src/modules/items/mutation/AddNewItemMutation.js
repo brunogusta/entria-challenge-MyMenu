@@ -33,13 +33,20 @@ export default mutationWithClientMutationId({
     const [name] = filename.split('.');
     const fileName = `${name}_${(Math.random() * 100).toFixed(2)}.jpg`;
 
+    const item = ItemModel.create({
+      title,
+      cost,
+      details,
+      file: fileName
+    });
+
+
     await new Promise((res) => createReadStream()
       .pipe(
         createWriteStream(
           path.join(__dirname, '../../../uploads', fileName)
         )
-      )
-      .on('close', res));
+      ).on('close', res));
 
 
     await sharp(path.resolve(__dirname, '../../../uploads', fileName))
@@ -48,14 +55,6 @@ export default mutationWithClientMutationId({
       .toFile(path.resolve(__dirname, '../../../uploads', 'resized', fileName));
 
     fs.unlinkSync(path.resolve(__dirname, '../../../uploads', fileName));
-
-
-    const item = await ItemModel.create({
-      title,
-      cost,
-      details,
-      file: fileName
-    });
 
 
     return item;

@@ -5,7 +5,7 @@ import { connectDatabase } from './database';
 
 import { schema } from './schema';
 import { getUser } from './utils/auth';
-import middlewares from '~/middlewares';
+import middlewares from './middlewares';
 
 require('dotenv-safe').config();
 
@@ -42,7 +42,8 @@ const contextSettings = async ({ request, connection }) => {
 const server = new GraphQLServer(
   {
     schema,
-    context: contextSettings
+    context: contextSettings,
+    middlewares
   }
 );
 

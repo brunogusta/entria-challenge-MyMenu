@@ -4,7 +4,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "npm run server",
-    "server": "rm -rf ./node_modules/.cache/babel-loader && nodemon --exec babel-node src/index.js",
+    "server": "rm -rf ./node_modules/.cache/babel-loader && nodemon --exec babel-node --inspect src/index.js",
     "test": "jest"
   },
   "keywords": [],
