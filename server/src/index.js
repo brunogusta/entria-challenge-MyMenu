@@ -1,16 +1,21 @@
 import { GraphQLServer } from 'graphql-yoga';
+import * as express from 'express';
+import path from 'path';
 import { connectDatabase } from './database';
-import { graphqlPort } from './config';
+
+import { schema } from './schema';
+import { getUser } from './utils/auth';
+import middlewares from '~/middlewares';
 
 require('dotenv-safe').config();
 
 
 const options = {
-  port: graphqlPort || '5000',
+  port: process.env.GRAPHQL_PORT || '5000',
   bodyParserOptions: { limit: '50mb', type: 'application/json' },
   endpoint: '/graphql',
   subscriptions: '/subscriptions',
-  playground: process.env.NODE_ENV === 'production' ? false : '/playground'
+  playground: process.env.NODE_ENV === 'production' ? false : '/graphql'
 };
 
 
@@ -22,25 +27,27 @@ const options = {
   }
 })();
 
-const typeDefs = `
-  type Query {
-    hello(name: String): String!
-  }
-`;
+const contextSettings = async ({ request, connection }) => {
+  const { user } = await getUser(
+    request ? request.headers.authorization : connection.context.headers.authorization
+  );
 
-const resolvers = {
-  Query: {
-    hello: (_, { name }) => `Hello ${name || 'World'}`
-  }
+  return {
+    ...request,
+    user
+  };
 };
 
 
 const server = new GraphQLServer(
   {
-    typeDefs,
-    resolvers
+    schema,
+    context: contextSettings,
+    middlewares
   }
 );
+
+server.express.use('/image', express.static(path.resolve(__dirname, 'uploads', 'resized')));
 
 
 server.start(options, ({ port }) => {

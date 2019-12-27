@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-import { databaseConfig } from './config';
+
+require('dotenv-safe').config();
 
 export function connectDatabase() {
   return new Promise((resolve, reject) => {
@@ -11,7 +12,7 @@ export function connectDatabase() {
 
 
     mongoose.connect(
-      databaseConfig,
+      process.env.MONGO_URL,
       {
         useNewUrlParser: true,
         useCreateIndex: true,
