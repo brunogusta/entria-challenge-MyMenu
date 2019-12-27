@@ -5,7 +5,7 @@
   <br>
 </h1>
 
-<h4 align="center"></h4>
+<!-- <h4 align="center"></h4>
 
 <p align="center"><i >"Yes, there is something better than a pizza, several pizza.
 "</i> </p>
@@ -93,4 +93,4 @@ MIT
 
 <p align='center'>
   Made with :hearts: by Bruno Gustavo.
-</p>
+</p> -->
