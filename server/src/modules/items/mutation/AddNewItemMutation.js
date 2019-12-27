@@ -30,9 +30,8 @@ export default mutationWithClientMutationId({
   }) => {
     const { createReadStream, filename } = await file;
 
-    console.log('chamou');
     const [name] = filename.split('.');
-    const fileName = `${name}_${(Math.random() * 100).toFixed(2)}.png`;
+    const fileName = `${name}_${(Math.random() * 100).toFixed(2)}.jpg`;
 
     await new Promise((res) => createReadStream()
       .pipe(
