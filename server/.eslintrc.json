@@ -17,6 +17,7 @@
     "rules": {
       "import/no-cycle": "off",
       "import/prefer-default-export": "off",
+      "new-cap": "off",
       "no-unused-expressions":"off",
       "no-underscore-dangle": ["error", { "allow": ["_id"] }],
       "comma-dangle": ["error", { "functions": "ignore" }],
