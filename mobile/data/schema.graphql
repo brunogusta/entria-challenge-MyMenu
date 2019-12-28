@@ -1,0 +1,43 @@
+type Mutation {
+  SignInUserMutation(input:UserInput!): UserPayload
+  SignUpUserMutation(input: UserInput!): UserPayload
+  AddNewItemMutation(input:AddNewItemInput!): AddNewItemPayload
+}
+
+
+type Query {
+  items(limit: Int): AddNewItemPayload
+}
+
+type Subscription {
+  NewItem: AddNewItemPayload
+}
+
+
+type UserPayload  {
+  _id: ID!
+  email: String!
+  token: String!
+  error: String
+}
+
+
+type AddNewItemPayload  {
+  _id: ID!
+  title: String!
+  cost: String!
+  file: String!
+  details: String!
+  error: String
+}
+
+input UserInput {
+  email: String!
+  password: String!
+}
+
+input AddNewItemInput {
+  title: String!
+  cost: String!
+  details: String!
+}

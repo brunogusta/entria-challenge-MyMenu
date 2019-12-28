@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik } from 'formik';
 import { showMessage } from 'react-native-flash-message';
+import { useRelayEnvironment } from 'react-relay/hooks';
+import { commitMutation } from 'relay-runtime';
 import LinearGradient from 'react-native-linear-gradient';
 import PropTypes from 'prop-types';
 import * as yup from 'yup';
+
 
 import {
   Container,
@@ -29,6 +32,9 @@ import background from '~/assets/images/background.png';
 import welcome from '~/assets/images/welcome.png';
 
 const Register = ({ navigation }) => {
+  const environment = useRelayEnvironment();
+  const [isPending, setPending] = useState(false);
+
   const handleSubmitValues = (values) => {
     console.log(values);
   };

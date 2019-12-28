@@ -35,7 +35,7 @@ const Routes = createAppContainer(
       App: AppStack,
     },
     {
-      initialRouteName: 'App',
+      initialRouteName: 'Auth',
     },
   ),
 );

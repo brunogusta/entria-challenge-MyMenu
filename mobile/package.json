@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "relay": "relay-compiler --src ./src --schema data/schema.graphql",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
@@ -24,7 +25,9 @@
     "react-native-vector-icons": "^6.6.0",
     "react-navigation": "^4.0.10",
     "react-navigation-stack": "^1.10.3",
+    "react-relay": "^8.0.0",
     "reactotron-react-native": "^4.0.2",
+    "relay-runtime": "^8.0.0",
     "styled-components": "^4.4.1",
     "yup": "^0.27.0"
   },
@@ -34,6 +37,7 @@
     "@react-native-community/eslint-config": "^0.0.5",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
+    "babel-plugin-relay": "^8.0.0",
     "babel-plugin-root-import": "^6.4.1",
     "eslint": "^6.7.2",
     "eslint-config-airbnb": "^18.0.1",
@@ -42,9 +46,13 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-react-native": "^3.8.1",
+    "graphql": "^14.5.8",
+    "graphql-compiler": "^1.7.0",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.57.0",
-    "react-test-renderer": "16.9.0"
+    "react-test-renderer": "16.9.0",
+    "relay-compiler": "^8.0.0",
+    "relay-config": "^8.0.0"
   },
   "jest": {
     "preset": "react-native"
