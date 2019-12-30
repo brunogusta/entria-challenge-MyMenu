@@ -1,6 +1,6 @@
 type Mutation {
-  SignInUserMutation(input:UserInput!): UserPayload
-  SignUpUserMutation(input: UserInput!): UserPayload
+  LoginMutation(input:UserInput!): UserPayload
+  RegisterMutation(input: UserInput!): UserPayload
   AddNewItemMutation(input:AddNewItemInput!): AddNewItemPayload
 }
 
@@ -23,6 +23,10 @@ type UserPayload  {
 
 
 type AddNewItemPayload  {
+  item: ItemType!
+}
+
+type ItemType {
   _id: ID!
   title: String!
   cost: String!

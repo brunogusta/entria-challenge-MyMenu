@@ -4,6 +4,7 @@ import { GraphQLUpload } from 'graphql-upload';
 import fs, { createWriteStream } from 'fs';
 import path from 'path';
 import sharp from 'sharp';
+import pubSub, { EVENTS } from '~/pubSub';
 
 import ItemType from '../ItemType';
 import ItemModel from '../ItemModel';
@@ -33,14 +34,15 @@ export default mutationWithClientMutationId({
     const [name] = filename.split('.');
     const fileName = `${name}_${(Math.random() * 100).toFixed(2)}.jpg`;
 
-    const item = ItemModel.create({
+
+    const item = await ItemModel.create({
       title,
       cost,
       details,
       file: fileName
     });
 
-
+    console.log(item);
     await new Promise((res) => createReadStream()
       .pipe(
         createWriteStream(
@@ -56,6 +58,8 @@ export default mutationWithClientMutationId({
 
     fs.unlinkSync(path.resolve(__dirname, '../../../uploads', fileName));
 
+
+    pubSub.publish(EVENTS.NEW_ITEM.ADD, { NewItem: item });
 
     return item;
   },

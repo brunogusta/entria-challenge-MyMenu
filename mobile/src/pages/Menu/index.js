@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { StatusBar, FlatList } from 'react-native';
+import { StatusBar, FlatList, AsyncStorage } from 'react-native';
+import { Icon } from 'react-native-elements';
+
+
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 import {
   Container,
   LogoImage,
   LogoWrapper,
+  LogOutBtn,
   ContentWrapper,
   FlatListWrapper,
   ItemBox,
@@ -16,15 +21,15 @@ import {
   ItemImage,
 } from './styles';
 
-import logo from '~/assets/images/logo.png';
+import logo from '../../assets/images/logo.png';
 
-import pizza from '~/assets/images/1.png';
+import pizza from '../../assets/images/1.png';
 
 import AnimatedModal from './components/AnimatedModal';
 import AnimatedDetails from './components/AnimatedDetails';
 
 
-const Menu = () => {
+const Menu = ({ navigation }) => {
   const [items] = useState({
     data: [
       {
@@ -33,33 +38,23 @@ const Menu = () => {
         cost: '23,00',
         details: 'Qualquer coisa 33, lorem ipsum testando, 123, 123, 123 osahdoahdoiashdosahd',
       },
-      {
-        id: '2',
-        title: 'Frango',
-        cost: '23,00',
-        details: 'Qualquer coisa 33',
-      },
-      {
-        id: '3',
-        title: 'Brócolis',
-        cost: '23,00',
-        details: 'Qualquer coisa 2123',
-      },
-      {
-        id: '4',
-        title: '4 Queijos',
-        cost: '23,00',
-        details: 'Qualquer coisa 12 ',
-      },
     ],
   });
 
+
+  const logOut = async () => {
+    await AsyncStorage.clear();
+    navigation.navigate('Auth');
+  };
 
   return (
     <Container>
       <StatusBar barStyle="light-content" backgroundColor="#E20048" />
       <LogoWrapper>
         <LogoImage source={logo} resizeMode="contain" />
+        <LogOutBtn onPress={logOut}>
+          <Icon name="logout" type="material-community" color="#fff" size={hp('4%')} />
+        </LogOutBtn>
       </LogoWrapper>
       <ContentWrapper>
         <AnimatedModal />

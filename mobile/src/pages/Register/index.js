@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { AsyncStorage } from 'react-native';
 import { Formik } from 'formik';
 import { showMessage } from 'react-native-flash-message';
 import { useRelayEnvironment } from 'react-relay/hooks';
-import { commitMutation } from 'relay-runtime';
+import { commitMutation, graphql } from 'relay-runtime';
 import LinearGradient from 'react-native-linear-gradient';
 import PropTypes from 'prop-types';
 import * as yup from 'yup';
@@ -27,16 +28,54 @@ import {
   LogoImage,
 } from './styles';
 
-import background from '~/assets/images/background.png';
+import background from '../../assets/images/background.png';
 
-import welcome from '~/assets/images/welcome.png';
+import welcome from '../../assets/images/welcome.png';
+
+
+const mutation = graphql`
+  mutation RegisterMutation($email: String!, $password: String!) {
+    RegisterMutation(input: {email: $email, password: $password}){
+       token
+    }
+  }
+`;
 
 const Register = ({ navigation }) => {
   const environment = useRelayEnvironment();
-  const [isPending, setPending] = useState(false);
 
-  const handleSubmitValues = (values) => {
-    console.log(values);
+  const handleSubmitValues = ({ email, password }) => {
+    commitMutation(
+      environment,
+      {
+        mutation,
+        variables: {
+          email,
+          password,
+        },
+        onCompleted: async ({ RegisterMutation }, errors) => {
+          if (errors) {
+            showMessage({
+              message: errors[0].message,
+              description: 'Oops! Looks like you already have an account!',
+              type: 'danger',
+            });
+            return;
+          }
+
+          await AsyncStorage.setItem('token', RegisterMutation.token);
+          showMessage({
+            message: 'Your account was successfully created!',
+            description: 'Start adding items to your menu!',
+            type: 'success',
+          });
+          navigation.navigate('Menu');
+        },
+        onError: (err) => {
+          console.log(err);
+        },
+      },
+    );
   };
 
 

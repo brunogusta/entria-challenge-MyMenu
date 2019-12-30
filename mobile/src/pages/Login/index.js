@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { showMessage } from 'react-native-flash-message';
+import { commitMutation, graphql } from 'relay-runtime';
+import { useRelayEnvironment } from 'react-relay/hooks';
 import LinearGradient from 'react-native-linear-gradient';
 import { Formik } from 'formik';
 import PropTypes from 'prop-types';
 import * as yup from 'yup';
+
+import { AsyncStorage } from 'react-native';
 
 import {
   Container,
@@ -23,15 +28,71 @@ import {
   styles,
 } from './styles';
 
-import background from '~/assets/images/background.png';
 
-import logo from '~/assets/images/logo.png';
+import background from '../../assets/images/background.png';
+
+import logo from '../../assets/images/logo.png';
+
+
+const mutation = graphql`
+  mutation LoginMutation($email: String!, $password: String!) {
+    LoginMutation(input: {email: $email, password: $password}){
+       token
+    }
+  }
+`;
+
 
 const Login = ({ navigation }) => {
-  const handleSubmitValues = (values) => {
-    console.log(values);
+  const environment = useRelayEnvironment();
+
+  const handleSubmitValues = ({ email, password }) => {
+    commitMutation(
+      environment,
+      {
+        mutation,
+        variables: {
+          email,
+          password,
+        },
+        onCompleted: async ({ LoginMutation }, errors) => {
+          if (errors) {
+            showMessage({
+              message: errors[0].message,
+              type: 'danger',
+            });
+            return;
+          }
+
+          await AsyncStorage.setItem('token', LoginMutation.token);
+          showMessage({
+            message: 'Login successfully',
+            description: 'Start adding items to your menu!',
+            type: 'success',
+          });
+          navigation.navigate('Menu');
+        },
+        onError: (err) => {
+          console.log(err);
+          showMessage({
+            message: 'Oops! Something went wrong, try again!',
+            type: 'danger',
+          });
+        },
+      },
+    );
   };
 
+  useEffect(() => {
+    async function getToken() {
+      const token = await AsyncStorage.getItem('token');
+
+      if (token) {
+        navigation.navigate('Menu');
+      }
+    }
+    getToken();
+  }, []);
 
   return (
     <BackGroundImage source={background}>

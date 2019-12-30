@@ -1,5 +1,6 @@
 {
-  "plugins": [
+  "presets": ["module:metro-react-native-babel-preset"],
+  "plugins":[
     ["relay",
     {
       "compat": true,
@@ -12,9 +13,9 @@
     [
       "babel-plugin-root-import",
       {
-       " rootPathSuffix": "src",
+       "rootPathSuffix": "src",
       },
     ],
   ],
-  "presets": ["module:metro-react-native-babel-preset"],
 }
+

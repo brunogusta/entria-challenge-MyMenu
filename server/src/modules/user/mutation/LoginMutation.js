@@ -4,28 +4,27 @@ import bcrypt from 'bcryptjs';
 
 import UserModel from '../UserModel';
 
-import UserType from '../UserType';
 
 import { generateToken } from '~/utils/auth';
 
 
 export default mutationWithClientMutationId({
-  name: 'SignInUserMutation',
+  name: 'LoginMutation',
   inputFields: {
-    emailInput: {
+    email: {
       type: new GraphQLNonNull(GraphQLString)
     },
-    passwordInput: {
+    password: {
       type: new GraphQLNonNull(GraphQLString)
     }
   },
-  mutateAndGetPayload: async ({ emailInput, passwordInput }) => {
-    const user = await UserModel.findOne({ email: emailInput });
+  mutateAndGetPayload: async ({ email, password }) => {
+    const user = await UserModel.findOne({ email });
     if (!user) throw new Error('The email you entered does not exist.');
 
-    const { password } = await UserModel.findOne({ email: emailInput }).select('password');
+    const userPass = await UserModel.findOne({ email }).select('password');
 
-    if (!bcrypt.compareSync(passwordInput, password)) {
+    if (!bcrypt.compareSync(password, userPass.password)) {
       throw new Error('Invalid Password');
     }
 
@@ -33,9 +32,9 @@ export default mutationWithClientMutationId({
     return userInfo;
   },
   outputFields: {
-    userInfo: {
-      type: UserType,
-      resolve: (userInfo) => userInfo
+    token: {
+      type: GraphQLString,
+      resolve: ({ token }) => token
     },
     error: {
       type: GraphQLString,

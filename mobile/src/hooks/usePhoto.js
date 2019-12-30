@@ -52,7 +52,6 @@ const usePhoto = () => {
             name: `${prefix}.${ext}`,
             uri: response.uri,
             type: response.type,
-            data,
           };
 
 

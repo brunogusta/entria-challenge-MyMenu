@@ -15,7 +15,7 @@ const options = {
   bodyParserOptions: { limit: '50mb', type: 'application/json' },
   endpoint: '/graphql',
   subscriptions: '/subscriptions',
-  playground: process.env.NODE_ENV === 'production' ? false : '/graphql'
+  playground: process.env.NODE_ENV === 'production' ? false : '/playground'
 };
 
 

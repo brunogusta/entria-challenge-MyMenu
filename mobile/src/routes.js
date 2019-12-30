@@ -2,9 +2,9 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
 
-import Login from '~/pages/Login';
-import Register from '~/pages/Register';
-import Menu from '~/pages/Menu';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Menu from './pages/Menu';
 
 
 const AuthStack = createStackNavigator(

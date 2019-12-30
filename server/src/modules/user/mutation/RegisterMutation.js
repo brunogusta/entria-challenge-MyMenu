@@ -6,28 +6,26 @@ import UserModel from '../UserModel';
 
 import { generateToken } from '~/utils/auth';
 
-import UserType from '../UserType';
-
 
 export default mutationWithClientMutationId({
-  name: 'SignUpUserMutation',
+  name: 'RegisterMutation',
   inputFields: {
-    emailInput: {
+    email: {
       type: new GraphQLNonNull(GraphQLString)
     },
-    passwordInput: {
+    password: {
       type: new GraphQLNonNull(GraphQLString)
     }
   },
-  mutateAndGetPayload: async ({ emailInput, passwordInput }) => {
-    let user = await UserModel.findOne({ email: emailInput.toLowerCase() });
+  mutateAndGetPayload: async ({ email, password }) => {
+    let user = await UserModel.findOne({ email: email.toLowerCase() });
 
     if (user) throw new Error('The entered email already exists.');
 
-    const newPass = bcrypt.hashSync(passwordInput, bcrypt.genSaltSync());
+    const newPass = bcrypt.hashSync(password, bcrypt.genSaltSync());
 
     user = new UserModel({
-      email: emailInput,
+      email,
       password: newPass
     });
 
@@ -37,9 +35,9 @@ export default mutationWithClientMutationId({
     return userInfo;
   },
   outputFields: {
-    userInfo: {
-      type: UserType,
-      resolve: (userInfo) => userInfo
+    token: {
+      type: GraphQLString,
+      resolve: ({ token }) => token
     },
     error: {
       type: GraphQLString,

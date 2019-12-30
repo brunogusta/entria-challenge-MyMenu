@@ -1,7 +1,7 @@
-import SignIn from './SignIn';
-import SignUp from './SignUp';
+import LoginMutation from './LoginMutation';
+import RegisterMutation from './RegisterMutation';
 
 export default {
-  SignIn,
-  SignUp
+  LoginMutation,
+  RegisterMutation
 };

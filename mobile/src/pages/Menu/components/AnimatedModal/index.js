@@ -8,7 +8,6 @@ import * as yup from 'yup';
 import { Icon } from 'react-native-elements';
 import { showMessage } from 'react-native-flash-message';
 
-
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import usePhoto from '~/hooks/usePhoto';
 
@@ -37,6 +36,8 @@ import {
 } from './styles';
 
 import catImage from '~/assets/images/catImage.png';
+
+import AddNewItemMutation from './AddNewItemMutation';
 
 const AnimatedModal = () => {
   const [photo, handleSelectImage, removeImage] = usePhoto();
@@ -101,13 +102,24 @@ const AnimatedModal = () => {
 
 
   const handleSubmitValues = ({ title, cost, details }) => {
-    const itemData = {
+    const item = {
       title,
       cost,
       details,
-      image: photo.data,
     };
 
+    const file = photo;
+
+    const onCompleted = ({ AddNewItemMutation }, errors) => {
+      console.log(AddNewItemMutation);
+    };
+
+    const onError = (err) => {
+      console.log(err);
+    };
+
+
+    AddNewItemMutation(item, file, onCompleted, onError);
     removeImage();
   };
 

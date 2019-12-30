@@ -13,6 +13,15 @@ export const LogoWrapper = styled.View`
   height: ${hp('10%')};
   padding: 0px 20px;
 `;
+export const LogOutBtn = styled.TouchableOpacity.attrs({
+  hitSlop: {
+    top: 5, bottom: 5, left: 5, right: 5,
+  },
+})`
+  position: absolute;
+  left:${wp('85%')};
+  right: 0;
+`;
 
 export const LogoImage = styled.Image`
   height: ${hp('9%')};

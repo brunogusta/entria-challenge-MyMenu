@@ -4,15 +4,16 @@ import {
   RecordSource,
   Store,
 } from 'relay-runtime';
+import { AsyncStorage } from 'react-native';
 
-import { getToken } from '~/utils/auth';
-import { handleData } from './helpers';
+async function fetchQuery(operation, variables, cacheConfig, uploadables) {
+  const token = await AsyncStorage.getItem('token');
 
-function fetchQuery(operation, variables, cacheConfig, uploadables) {
   const request = {
     method: 'POST',
     headers: {
-      Authorization: `bearer ${getToken()}`,
+      Authorization: `bearer ${token}`,
+      Accept: '*/*',
     },
   };
 
@@ -31,7 +32,9 @@ function fetchQuery(operation, variables, cacheConfig, uploadables) {
       }
     });
 
+
     request.body = formData;
+    console.log(request.body._parts);
   } else {
     request.headers['Content-Type'] = 'application/json';
     request.body = JSON.stringify({
@@ -40,17 +43,12 @@ function fetchQuery(operation, variables, cacheConfig, uploadables) {
     });
   }
 
-  return fetch('http://localhost:4000/graphql', request)
+  return fetch('http://10.10.10.7:4000/graphql', request)
     .then((response) => {
-      const data = handleData(response);
-
       if (response.status === 200) {
         return response.json();
       }
 
-      if (response.status === 401) {
-        throw data.errors;
-      }
 
       return response.json();
     })
