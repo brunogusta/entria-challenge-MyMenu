@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 9f8cda8318c606fd89b8f15917553888
+ * @relayHash f86ee6cd3ada23788343a8379b8aaa7e
  */
 
 /* eslint-disable */
@@ -13,6 +13,7 @@ export type AddNewItemMutationVariables = {|
   title: string,
   cost: string,
   details: string,
+  file: any,
 |};
 export type AddNewItemMutationResponse = {|
   +AddNewItemMutation: ?{|
@@ -21,7 +22,7 @@ export type AddNewItemMutationResponse = {|
       +title: string,
       +cost: string,
       +details: string,
-      +file: string,
+      +fileName: string,
     |}
   |}
 |};
@@ -37,14 +38,15 @@ mutation AddNewItemMutation(
   $title: String!
   $cost: String!
   $details: String!
+  $file: Upload!
 ) {
-  AddNewItemMutation(input: {title: $title, cost: $cost, details: $details}) {
+  AddNewItemMutation(input: {title: $title, cost: $cost, details: $details, file: $file}) {
     item {
       _id
       title
       cost
       details
-      file
+      fileName
     }
   }
 }
@@ -69,6 +71,12 @@ var v0 = [
     "name": "details",
     "type": "String!",
     "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
+    "name": "file",
+    "type": "Upload!",
+    "defaultValue": null
   }
 ],
 v1 = [
@@ -91,6 +99,11 @@ v1 = [
             "kind": "Variable",
             "name": "details",
             "variableName": "details"
+          },
+          {
+            "kind": "Variable",
+            "name": "file",
+            "variableName": "file"
           },
           {
             "kind": "Variable",
@@ -143,7 +156,7 @@ v1 = [
           {
             "kind": "ScalarField",
             "alias": null,
-            "name": "file",
+            "name": "fileName",
             "args": null,
             "storageKey": null
           }
@@ -172,11 +185,11 @@ return {
     "operationKind": "mutation",
     "name": "AddNewItemMutation",
     "id": null,
-    "text": "mutation AddNewItemMutation(\n  $title: String!\n  $cost: String!\n  $details: String!\n) {\n  AddNewItemMutation(input: {title: $title, cost: $cost, details: $details}) {\n    item {\n      _id\n      title\n      cost\n      details\n      file\n    }\n  }\n}\n",
+    "text": "mutation AddNewItemMutation(\n  $title: String!\n  $cost: String!\n  $details: String!\n  $file: Upload!\n) {\n  AddNewItemMutation(input: {title: $title, cost: $cost, details: $details, file: $file}) {\n    item {\n      _id\n      title\n      cost\n      details\n      fileName\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'b74332c9cf41b0414391996b1001b48b';
+(node/*: any*/).hash = '2604724d11166b2b8b75ddd4db18f44a';
 module.exports = node;

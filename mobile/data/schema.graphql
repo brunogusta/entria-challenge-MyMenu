@@ -1,3 +1,5 @@
+scalar Upload
+
 type Mutation {
   LoginMutation(input:UserInput!): UserPayload
   RegisterMutation(input: UserInput!): UserPayload
@@ -30,7 +32,7 @@ type ItemType {
   _id: ID!
   title: String!
   cost: String!
-  file: String!
+  fileName: String!
   details: String!
   error: String
 }
@@ -44,4 +46,7 @@ input AddNewItemInput {
   title: String!
   cost: String!
   details: String!
+  file: Upload!
 }
+
+

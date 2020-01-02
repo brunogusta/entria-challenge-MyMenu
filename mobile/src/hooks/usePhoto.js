@@ -34,8 +34,6 @@ const usePhoto = () => {
             });
           }
 
-          const data = `data:image/jpeg;base64, ${response.data}`;
-
 
           let prefix;
           let ext;
