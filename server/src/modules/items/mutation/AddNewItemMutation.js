@@ -29,17 +29,14 @@ export default mutationWithClientMutationId({
   mutateAndGetPayload: async ({
     title, cost, details, file
   }) => {
-    const { createReadStream, filename } = await file;
-
-    const [name] = filename.split('.');
-    const fileName = `${name}_${(Math.random() * 100).toFixed(2)}.jpg`;
+    const { createReadStream, filename: fileName } = await file;
 
 
     const item = await ItemModel.create({
       title,
       cost,
       details,
-      file: fileName
+      fileName
     });
 
     console.log(item);

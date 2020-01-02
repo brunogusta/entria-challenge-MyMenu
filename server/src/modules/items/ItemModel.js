@@ -16,7 +16,7 @@ const ItemSchema = new Schema(
       type: String,
       required: true
     },
-    file: {
+    fileName: {
       type: String,
       required: true
     }

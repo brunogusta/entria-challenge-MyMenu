@@ -25,9 +25,9 @@ const ItemType = new GraphQLObjectType({
       type: GraphQLString,
       resolve: (item) => item.details
     },
-    file: {
+    fileName: {
       type: GraphQLString,
-      resolve: (item) => item.file
+      resolve: (item) => item.fileName
     }
   })
 });
