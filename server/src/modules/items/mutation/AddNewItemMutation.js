@@ -56,7 +56,7 @@ export default mutationWithClientMutationId({
     fs.unlinkSync(path.resolve(__dirname, '../../../uploads', fileName));
 
 
-    pubSub.publish(EVENTS.NEW_ITEM.ADD, { NewItem: item });
+    await pubSub.publish(EVENTS.NEW_ITEM.ADD, { item });
 
     return item;
   },

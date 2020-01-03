@@ -31,6 +31,7 @@
     "reactotron-react-native": "^4.0.2",
     "relay-runtime": "^8.0.0",
     "styled-components": "^4.4.1",
+    "subscriptions-transport-ws": "^0.9.16",
     "yup": "^0.27.0"
   },
   "devDependencies": {

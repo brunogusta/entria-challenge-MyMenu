@@ -7,6 +7,10 @@ import {
 import { AsyncStorage } from 'react-native';
 import { extractFiles } from 'extract-files';
 
+import { SubscriptionClient } from 'subscriptions-transport-ws';
+import { baseURL } from '../services/api';
+
+
 async function fetchQuery(operation, variables, cacheConfig, uploadables) {
   const token = await AsyncStorage.getItem('token');
   const request = {
@@ -51,7 +55,7 @@ async function fetchQuery(operation, variables, cacheConfig, uploadables) {
       variables,
     });
   }
-  return fetch('http://10.10.10.7:4000/graphql', request)
+  return fetch(`${baseURL}/graphql`, request)
     .then((response) => {
       if (response.status === 200) {
         return response.json();
@@ -65,6 +69,16 @@ async function fetchQuery(operation, variables, cacheConfig, uploadables) {
     });
 }
 
+const setupSubscription = (operation, variables, cacheConfig) => {
+  const query = operation.text;
+  console.log(operation.text);
+  const subscriptionClient = new SubscriptionClient(`${baseURL}/subscription`, { reconnect: true });
+
+  const observable = subscriptionClient.request({ query, variables });
+
+  return observable;
+};
+
 const source = new RecordSource();
 const store = new Store(source);
 
@@ -72,6 +86,6 @@ const store = new Store(source);
 export default new Environment({
   // network: networkLayer,
   // handlerProvider,
-  network: Network.create(fetchQuery),
+  network: Network.create(fetchQuery, setupSubscription),
   store,
 });

@@ -6,21 +6,28 @@ type Mutation {
   AddNewItemMutation(input:AddNewItemInput!): AddNewItemPayload
 }
 
-
 type Query {
-  items(limit: Int): AddNewItemPayload
+  items(limit: Int): [ItemsPayload]
 }
 
 type Subscription {
-  NewItem: AddNewItemPayload
+  newItemSubscription: AddNewItemPayload
 }
+
 
 
 type UserPayload  {
   _id: ID!
   email: String!
   token: String!
-  error: String
+}
+
+type ItemsPayload {
+  _id: ID!
+  title: String!
+  cost: String!
+  fileName: String!
+  details: String!
 }
 
 
@@ -34,7 +41,6 @@ type ItemType {
   cost: String!
   fileName: String!
   details: String!
-  error: String
 }
 
 input UserInput {
