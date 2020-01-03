@@ -7,8 +7,7 @@
 
 <h4 align="center"></h4>
 
-<p align="center"><i >"Save your special foods".
-"</i> </p>
+<p align="center"><i >"Save your special foods"</i> </p>
 
 <p align="center">
   <a href="#how-to-use">How To Use</a> •
