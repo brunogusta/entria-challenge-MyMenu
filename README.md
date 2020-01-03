@@ -36,8 +36,6 @@ Clone the project from Github :
 git clone git@github.com:brunogusta/entria-challenge-MyMenu.git
 ```
 
-### Mobile
-
 The mobile folder contains all front-end code made with react-native.
 
 Check out this [Rocketseat](https://docs.rocketseat.dev/ambiente-react-native/introducao) page to learn how to set up your environment to run a mobile version with React Native.
@@ -65,6 +63,9 @@ GRAPHQL_PORT=5000
 JWT_KEY=awesome_secret_key
 
 ```
+
+**Note**: The backend uses MongoDB as a database, you must have it installed or use MongoDB Atlas for proper operation.
+
 Start the server with **yarn start** or **npm start**.
 
 In the mobile folder, after you have installed the dependencies you will need to change the ip in the **src/service/api.js** folder to the local ip of your machine.
