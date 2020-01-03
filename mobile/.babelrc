@@ -1,21 +1,13 @@
 {
-  "presets": ["module:metro-react-native-babel-preset"],
-  "plugins":[
+  "plugins": [
     ["relay",
-    {
-      "compat": true,
-      "schema": "./data/schema.graphql",
-      "enforceSchema": true,
-      "suppressWarnings": false,
-      "debug": false,
-    }
-    ],
-    [
-      "babel-plugin-root-import",
       {
-       "rootPathSuffix": "src",
+        "compat": true,
+        "schema": "./data/schema.graphql",
+        "enforceSchema": true,
+        "suppressWarnings": false,
+        "debug": false,
       },
     ],
-  ],
+  ]
 }
-
