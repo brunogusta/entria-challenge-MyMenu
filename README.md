@@ -1,10 +1,7 @@
-<h4 align="center">
-  <img src="https://i.imgur.com/kp4BS9C.png" alt="Login" height="80">
-</h4>
-
 <h1 align="center">
+  <img src="https://i.imgur.com/kp4BS9C.png" alt="Login" height="80">
+  </br>
   <b>MyMenu</b>
-  <br>
 </h1>
 
 
