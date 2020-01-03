@@ -11,7 +11,6 @@
 
 <p align="center">
   <a href="#how-to-use">How To Use</a> •
-  <a href="#credits">Credits</a> •
   <a href="#license">License</a>
 </p>
 
@@ -28,7 +27,11 @@
   <img src="https://i.imgur.com/mAN5OOv.jpg" alt="Login" height="400">
 </p>
 
-## Getting started
+
+<div id="how-to-use">
+  
+  ## Getting started
+</div>
 
 Clone the project from Github :
 ```sh
