@@ -5,7 +5,9 @@
   <br>
 </h1>
 
-<h4 align="center"></h4>
+<h4 align="center">
+  <img src="https://i.imgur.com/kp4BS9C.png" alt="Login" height="80">
+</h4>
 
 <p align="center"><i >"Save your special foods"</i> </p>
 
