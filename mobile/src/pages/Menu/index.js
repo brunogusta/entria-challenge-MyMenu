@@ -4,6 +4,7 @@ import { StatusBar, FlatList, AsyncStorage } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { graphql, QueryRenderer, requestSubscription } from 'react-relay';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { showMessage } from 'react-native-flash-message';
 
 
 import {
@@ -19,7 +20,6 @@ import {
   ItemText,
   ImageWrapper,
   ItemImage,
-  Loading,
   NoImageWrapper,
   NoItemImage,
 } from './styles';
@@ -83,8 +83,11 @@ const Menu = ({ navigation }) => {
 
   const renderQuery = ({ error, props }) => {
     if (error) {
-      return <Loading>{error}</Loading>;
-    } if (props && isEmpty(props.items)) {
+      return showMessage({
+        message: 'Always went wrong when fetching items, try again',
+        type: 'danger',
+      });
+    } if (props && !isEmpty(props.items)) {
       return (
         <FlatList
           data={props.items}
