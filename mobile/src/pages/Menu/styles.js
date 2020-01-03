@@ -74,6 +74,11 @@ export const HeaderWrapper = styled.View`
 `;
 
 export const ImageWrapper = styled.View`
+  flex: 2;
+  justify-content: center;
+  align-items: center;
+`;
+export const NoImageWrapper = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
@@ -81,11 +86,18 @@ export const ImageWrapper = styled.View`
 
 export const ItemImage = styled.Image`
   flex: 1;
+  height: 100px;
+  width: 100px;
+
+`;
+
+export const NoItemImage = styled.Image`
+  height: ${hp('40%')};
+  width: ${wp('80%')};
 `;
 
 export const InfoWrapper = styled.View`
   flex: 1;
-  padding-left: 10px;
   justify-content: center;
   align-items: center;
 `;
@@ -112,3 +124,9 @@ export const styles = StyleSheet.create({
     padding: 10,
   },
 });
+
+export const Loading = styled.Text`
+ font-size: ${hp('3%')};
+ color: #575757;
+ font-weight: bold;
+`;

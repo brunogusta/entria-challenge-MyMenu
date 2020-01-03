@@ -111,7 +111,6 @@ const AnimatedModal = () => {
     const file = photo;
 
     const onCompleted = ({ AddNewItemMutation }, errors) => {
-      console.log(AddNewItemMutation);
     };
 
     const onError = (err) => {
