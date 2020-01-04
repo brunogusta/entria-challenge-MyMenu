@@ -110,11 +110,11 @@ const Login = ({ navigation }) => {
             validationSchema={yup.object().shape({
               email: yup
                 .string()
-                .email('O E-mail informado não é válido.')
-                .required('O E-mail é obrigatório.'),
+                .email('The Email you entered is not valid')
+                .required('Email is required.'),
               password: yup
                 .string()
-                .required('A senha é obrigatória.'),
+                .required('Password is required.'),
             })}
           >
             {({
