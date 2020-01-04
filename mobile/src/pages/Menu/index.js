@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import PropTypes, { func } from 'prop-types';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { StatusBar, FlatList, AsyncStorage } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { graphql, QueryRenderer, requestSubscription } from 'react-relay';
@@ -24,7 +24,7 @@ import {
   NoItemImage,
 } from './styles';
 
-import logo from '../../assets/images/logo.png';
+import logo from '~/assets/images/logo.png';
 
 import noItemsImage from '~/assets/images/no_items.png';
 
@@ -32,9 +32,9 @@ import { isEmpty } from '~/utils/helpers';
 import AnimatedModal from './components/AnimatedModal';
 import AnimatedDetails from './components/AnimatedDetails';
 
-import environment from '../../relay/Environment';
+import environment from '~/relay/Environment';
 
-import { baseURL } from '../../services/api';
+import { baseURL } from '~/services/api';
 
 const query = graphql`
   query MenuQuery($limit: Int) {
@@ -92,7 +92,7 @@ const Menu = ({ navigation }) => {
         <FlatList
           data={props.items}
           renderItem={({ item }) => (
-            <ItemBox key={item.title}>
+            <ItemBox>
               <AnimatedDetails details={item.details} />
               <HeaderWrapper>
                 <ImageWrapper>
@@ -105,6 +105,7 @@ const Menu = ({ navigation }) => {
               </HeaderWrapper>
             </ItemBox>
           )}
+          keyExtractor={(item, index) => index.toString()}
           showsVerticalScrollIndicator={false}
         />
       );
@@ -129,7 +130,7 @@ const Menu = ({ navigation }) => {
         </LogOutBtn>
       </LogoWrapper>
       <ContentWrapper>
-        <AnimatedModal />
+        <AnimatedModal navigation={navigation} />
         <FlatListWrapper>
           <QueryRenderer
             environment={environment}

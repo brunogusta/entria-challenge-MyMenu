@@ -86,8 +86,8 @@ export const NoImageWrapper = styled.View`
 
 export const ItemImage = styled.Image`
   flex: 1;
-  height: 100px;
-  width: 100px;
+  height: ${hp('10%')};
+  width: ${wp('30%')};
 
 `;
 

@@ -8,7 +8,7 @@ import { AsyncStorage } from 'react-native';
 import { extractFiles } from 'extract-files';
 
 import { SubscriptionClient } from 'subscriptions-transport-ws';
-import { baseURL } from '../services/api';
+import { baseURL } from '~/services/api';
 
 
 async function fetchQuery(operation, variables, cacheConfig, uploadables) {

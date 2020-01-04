@@ -1,6 +1,6 @@
 import { commitMutation, graphql } from 'relay-runtime';
 import { ReactNativeFile } from 'extract-files';
-import environment from '../../../../relay/Environment';
+import environment from '~/relay/Environment';
 
 const mutation = graphql`
     mutation AddNewItemMutation ($title: String!, $cost: String!, $details: String!, $file: Upload! )  {

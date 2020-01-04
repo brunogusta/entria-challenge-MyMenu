@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import {
   Animated, Easing, Keyboard, KeyboardAvoidingView,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import LinearGradient from 'react-native-linear-gradient';
 import { Formik } from 'formik';
-import * as yup from 'yup';
 import { Icon } from 'react-native-elements';
 import { showMessage } from 'react-native-flash-message';
 
@@ -39,7 +39,7 @@ import catImage from '~/assets/images/catImage.png';
 
 import AddNewItemMutation from './AddNewItemMutation';
 
-const AnimatedModal = () => {
+const AnimatedModal = ({ navigation }) => {
   const [photo, handleSelectImage, removeImage] = usePhoto();
   const [showImage, setShowImage] = useState(true);
   const [animation, setAnimation] = useState({
@@ -102,21 +102,58 @@ const AnimatedModal = () => {
 
 
   const handleSubmitValues = ({ title, cost, details }) => {
-    const item = {
-      title,
-      cost,
-      details,
-    };
+    if (title.length === 0) {
+      return showMessage({
+        message: 'All fields must be completed',
+        type: 'danger',
+      });
+    } if (cost.length === 0) {
+      return showMessage({
+        message: 'All fields must be completed',
+        type: 'danger',
+      });
+    } if (details.length === 0) {
+      return showMessage({
+        message: 'All fields must be completed',
+        type: 'danger',
+      });
+    }
+
 
     const file = photo;
+    if (file === null) {
+      return showMessage({
+        message: 'No images have been selected',
+        type: 'danger',
+      });
+    }
 
-    const onCompleted = ({ AddNewItemMutation }, errors) => {
+
+    const onCompleted = (_, errors) => {
+      if (errors) {
+        showMessage({
+          message: 'Always went wrong when upload item, try again',
+          type: 'danger',
+        });
+      } else {
+        showMessage({
+          message: 'New item added successfully',
+          type: 'success',
+        });
+        navigation.navigate('Menu');
+        closeModal();
+      }
     };
 
     const onError = (err) => {
       console.log(err);
     };
 
+    const item = {
+      title,
+      cost,
+      details,
+    };
 
     AddNewItemMutation(item, file, onCompleted, onError);
     removeImage();
@@ -146,22 +183,17 @@ const AnimatedModal = () => {
           <ContentWrapper>
             <ScrollView showsVerticalScrollIndicator={false}>
               <Formik
-                initialValues={{ title: '', cost: '', details: '' }}
+                initialValues={{ title: null, cost: null, details: null }}
                 onSubmit={(values, actions) => {
                   actions.resetForm();
                   return handleSubmitValues(values);
                 }}
-                validationSchema={yup.object().shape({
-                })}
               >
                 {({
                   values,
                   handleSubmit,
                   handleChange,
-                  errors,
                   setFieldTouched,
-                  touched,
-                  isValid,
                 }) => (
                   <FormContainer>
                     <SelectImageWrapper>
@@ -240,3 +272,9 @@ const AnimatedModal = () => {
 
 
 export default AnimatedModal;
+
+AnimatedModal.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};

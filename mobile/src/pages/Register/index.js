@@ -28,9 +28,9 @@ import {
   LogoImage,
 } from './styles';
 
-import background from '../../assets/images/background.png';
+import background from '~/assets/images/background.png';
 
-import welcome from '../../assets/images/welcome.png';
+import welcome from '~/assets/images/welcome.png';
 
 
 const mutation = graphql`
@@ -95,12 +95,12 @@ const Register = ({ navigation }) => {
             validationSchema={yup.object().shape({
               email: yup
                 .string()
-                .email('O E-mail informado não é válido.')
-                .required('O E-mail é obrigatório.'),
+                .email('The Email you entered is not valid')
+                .required('Email is required.'),
               password: yup
                 .string()
-                .required('A senha é obrigatória.'),
-              confirmPassword: yup.string().test('', 'As senhas não são idênticas',
+                .required('Password is required.'),
+              confirmPassword: yup.string().test('', 'Passwords are not identical',
                 function test(value) {
                   return this.parent.password === value;
                 }),
