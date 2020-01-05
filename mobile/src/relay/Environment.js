@@ -3,6 +3,7 @@ import {
   Network,
   RecordSource,
   Store,
+  Observable,
 } from 'relay-runtime';
 import { AsyncStorage } from 'react-native';
 import { extractFiles } from 'extract-files';
@@ -11,12 +12,23 @@ import { SubscriptionClient } from 'subscriptions-transport-ws';
 import { baseURL } from '~/services/api';
 
 
+let token = '';
+
+async function getToken() {
+  const resp = await AsyncStorage.getItem('token');
+
+  token = resp;
+}
+
+getToken();
+
+
 async function fetchQuery(operation, variables, cacheConfig, uploadables) {
-  const token = await AsyncStorage.getItem('token');
+  const tokenQuery = await AsyncStorage.getItem('token');
   const request = {
     method: 'POST',
     headers: {
-      Authorization: `bearer ${token}`,
+      Authorization: `bearer ${tokenQuery}`,
     },
   };
 
@@ -69,14 +81,20 @@ async function fetchQuery(operation, variables, cacheConfig, uploadables) {
     });
 }
 
-const setupSubscription = (operation, variables, cacheConfig) => {
+
+const setupSubscription = (operation, variables) => {
   const query = operation.text;
-  console.log(operation.text);
-  const subscriptionClient = new SubscriptionClient(`${baseURL}/subscription`, { reconnect: true });
+  const subscriptionClient = new SubscriptionClient('ws://10.10.10.7:4000/subscriptions', {
+    reconnect: true,
+    connectionParams: {
+      authorization: `bearer ${token}`,
+    },
+  });
 
-  const observable = subscriptionClient.request({ query, variables });
+  const Observer = subscriptionClient.request({ query, variables });
 
-  return observable;
+
+  return Observable.from(Observer);
 };
 
 const source = new RecordSource();
