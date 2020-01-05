@@ -39,7 +39,6 @@ export default mutationWithClientMutationId({
       fileName
     });
 
-    console.log(item);
     await new Promise((res) => createReadStream()
       .pipe(
         createWriteStream(
@@ -56,7 +55,8 @@ export default mutationWithClientMutationId({
     fs.unlinkSync(path.resolve(__dirname, '../../../uploads', fileName));
 
 
-    await pubSub.publish(EVENTS.NEW_ITEM.ADD, { item });
+    pubSub.publish(EVENTS.NEW_ITEM.ADD, { NewItemSubscription: item });
+
 
     return item;
   },
