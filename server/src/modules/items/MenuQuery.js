@@ -15,7 +15,6 @@ export default {
     },
     resolve: async (_, { limit = null }) => {
       const data = await ItemModel.find().limit(limit);
-
       return data;
     }
   }

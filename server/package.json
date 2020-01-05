@@ -4,7 +4,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "npm run server",
-    "server": "rm -rf ./node_modules/.cache/babel-loader && nodemon --exec babel-node --inspect src/index.js",
+    "server": "rm -rf ./node_modules/.cache/babel-loader && nodemon --exec babel-node src/index.js",
     "test": "jest"
   },
   "keywords": [],
@@ -24,7 +24,8 @@
     "jwt-simple": "^0.5.6",
     "mongoose": "^5.8.2",
     "multer": "^1.4.2",
-    "sharp": "^0.23.4"
+    "sharp": "^0.23.4",
+    "subscriptions-transport-ws": "^0.9.16"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.7",

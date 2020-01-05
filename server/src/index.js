@@ -7,6 +7,7 @@ import { schema } from './schema';
 import { getUser } from './utils/auth';
 import middlewares from './middlewares';
 
+
 require('dotenv-safe').config();
 
 
@@ -29,7 +30,7 @@ const options = {
 
 const contextSettings = async ({ request, connection }) => {
   const { user } = await getUser(
-    request ? request.headers.authorization : connection.context.headers.authorization
+    request ? request.headers.authorization : connection.context.authorization
   );
 
   return {
@@ -46,6 +47,7 @@ const server = new GraphQLServer(
     middlewares
   }
 );
+
 
 server.express.use('/image', express.static(path.resolve(__dirname, 'uploads', 'resized')));
 
