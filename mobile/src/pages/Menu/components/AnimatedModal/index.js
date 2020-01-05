@@ -10,6 +10,7 @@ import { showMessage } from 'react-native-flash-message';
 
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import usePhoto from '~/hooks/usePhoto';
+import Spin from '~/utils/loading';
 
 import {
   Container,
@@ -41,6 +42,7 @@ import AddNewItemMutation from './AddNewItemMutation';
 
 const AnimatedModal = ({ navigation }) => {
   const [photo, handleSelectImage, removeImage] = usePhoto();
+  const [loading, setLoading] = useState(false);
   const [showImage, setShowImage] = useState(true);
   const [animation, setAnimation] = useState({
     modalYtranslate: new Animated.Value(0),
@@ -128,9 +130,10 @@ const AnimatedModal = ({ navigation }) => {
       });
     }
 
-
+    setLoading(true);
     const onCompleted = (_, errors) => {
       if (errors) {
+        setLoading(false);
         showMessage({
           message: 'Always went wrong when upload item, try again',
           type: 'danger',
@@ -141,11 +144,13 @@ const AnimatedModal = ({ navigation }) => {
           type: 'success',
         });
         navigation.navigate('Menu');
+        setLoading(false);
         closeModal();
       }
     };
 
     const onError = (err) => {
+      setLoading(false);
       console.log(err);
     };
 
@@ -183,7 +188,7 @@ const AnimatedModal = ({ navigation }) => {
           <ContentWrapper>
             <ScrollView showsVerticalScrollIndicator={false}>
               <Formik
-                initialValues={{ title: null, cost: null, details: null }}
+                initialValues={{ title: '', cost: '', details: '' }}
                 onSubmit={(values, actions) => {
                   actions.resetForm();
                   return handleSubmitValues(values);
@@ -251,7 +256,7 @@ const AnimatedModal = ({ navigation }) => {
                         colors={['#ff512f', '#dd2476']}
                         style={styles.gradient}
                       >
-                        <TextBtn>Send</TextBtn>
+                        { loading ? <Spin isBtn /> : <TextBtn>Send</TextBtn> }
                       </LinearGradient>
                     </SendBtn>
                   </FormContainer>

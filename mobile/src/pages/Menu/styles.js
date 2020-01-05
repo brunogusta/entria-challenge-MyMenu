@@ -51,6 +51,12 @@ export const FlatListWrapper = styled.View`
   padding-bottom: 10px;
 `;
 
+export const LoadingWrapper = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const ItemBox = styled.View.attrs({
   shadowColor: '#000',
   shadowOffset: {
