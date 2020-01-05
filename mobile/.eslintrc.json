@@ -24,6 +24,7 @@
       { "extensions": [".js", ".jsx"] }
     ],
     "import/prefer-default-export": "off",
+    "react/prop-types": "off",
     "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
     "react/no-this-in-sfc": "off",
     "react/jsx-one-expression-per-line": "off",

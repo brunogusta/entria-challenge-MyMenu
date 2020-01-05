@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 4f0d43c244ad6b7259981683c1c7c49e
+ * @relayHash f60d231077b49e4042d869f40ad68ca4
  */
 
 /* eslint-disable */
@@ -11,14 +11,12 @@
 import type { ConcreteRequest } from 'relay-runtime';
 export type MenuSubscriptionVariables = {||};
 export type MenuSubscriptionResponse = {|
-  +newItemSubscription: ?{|
-    +item: {|
-      +_id: string,
-      +title: string,
-      +cost: string,
-      +fileName: string,
-      +details: string,
-    |}
+  +NewItemSubscription: ?{|
+    +_id: string,
+    +title: string,
+    +cost: string,
+    +fileName: string,
+    +details: string,
   |}
 |};
 export type MenuSubscription = {|
@@ -30,14 +28,12 @@ export type MenuSubscription = {|
 
 /*
 subscription MenuSubscription {
-  newItemSubscription {
-    item {
-      _id
-      title
-      cost
-      fileName
-      details
-    }
+  NewItemSubscription {
+    _id
+    title
+    cost
+    fileName
+    details
   }
 }
 */
@@ -47,57 +43,46 @@ var v0 = [
   {
     "kind": "LinkedField",
     "alias": null,
-    "name": "newItemSubscription",
+    "name": "NewItemSubscription",
     "storageKey": null,
     "args": null,
-    "concreteType": "AddNewItemPayload",
+    "concreteType": "ItemsPayload",
     "plural": false,
     "selections": [
       {
-        "kind": "LinkedField",
+        "kind": "ScalarField",
         "alias": null,
-        "name": "item",
-        "storageKey": null,
+        "name": "_id",
         "args": null,
-        "concreteType": "ItemType",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "_id",
-            "args": null,
-            "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "title",
-            "args": null,
-            "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "cost",
-            "args": null,
-            "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "fileName",
-            "args": null,
-            "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "details",
-            "args": null,
-            "storageKey": null
-          }
-        ]
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "title",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "cost",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "fileName",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "details",
+        "args": null,
+        "storageKey": null
       }
     ]
   }
@@ -122,11 +107,11 @@ return {
     "operationKind": "subscription",
     "name": "MenuSubscription",
     "id": null,
-    "text": "subscription MenuSubscription {\n  newItemSubscription {\n    item {\n      _id\n      title\n      cost\n      fileName\n      details\n    }\n  }\n}\n",
+    "text": "subscription MenuSubscription {\n  NewItemSubscription {\n    _id\n    title\n    cost\n    fileName\n    details\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '4181232ae988d0b3f3ecd5dbb33fa50d';
+(node/*: any*/).hash = 'c182eb42f275ccf873e596318cd3aff3';
 module.exports = node;
