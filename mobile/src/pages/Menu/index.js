@@ -88,7 +88,7 @@ const Menu = ({ navigation }) => {
   );
 
 
-  const renderQuery = ({ error, props }) => {
+  const renderQuery = ({ error, props, retry }) => {
     if (error) {
       return showMessage({
         message: 'Always went wrong when fetching items, try again',
@@ -96,6 +96,7 @@ const Menu = ({ navigation }) => {
       });
     } if (!props) return (<LoadingWrapper><Spin /></LoadingWrapper>);
     const { items } = props;
+    if (isEmpty(items)) retry();
     if (props && !isEmpty(items)) {
       if (state.firstCall) setState({ firstCall: false, items });
       return (
@@ -170,7 +171,7 @@ Menu.propTypes = {
       cost: PropTypes.string.isRequired,
       details: PropTypes.string.isRequired,
     }).isRequired,
-  ).isRequired,
+  ),
   props: PropTypes.shape({
     items: PropTypes.array.isRequired,
   }),
@@ -182,4 +183,5 @@ Menu.propTypes = {
 Menu.defaultProps = {
   error: null,
   props: undefined,
+  items: undefined,
 };
