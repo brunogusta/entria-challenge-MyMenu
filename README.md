@@ -64,7 +64,11 @@ JWT_KEY=awesome_secret_key
 
 ```
 
+Then you need to create a **uploads/resized** folders in **src** to store the images.
+
 **Note**: The backend uses MongoDB as a database, you must have it installed or use MongoDB Atlas for proper operation.
+
+
 
 Start the server with **yarn start** or **npm start**.
 
