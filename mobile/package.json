@@ -13,7 +13,7 @@
   "dependencies": {
     "apollo-link": "^1.2.13",
     "apollo-link-ws": "^1.0.19",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "extract-files": "^6.0.0",
     "formik": "^2.0.8",
     "graphql-upload": "^9.0.0",
